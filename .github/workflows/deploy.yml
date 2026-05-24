@@ -46,7 +46,12 @@ jobs:
         run: |
           cd frontend
           npm ci
-          npm run build || true
+          npx tsc --noEmit 2>&1 || true
+          npm run build 2>&1 || true
+        # run: |
+        #   cd frontend
+        #   npm ci
+        #   npm run build || true
 
   build-and-push:
     name: Build & Push to ECR
@@ -79,7 +84,7 @@ jobs:
       - name: Build & Push Frontend Image
         run: |
           cd frontend
-          docker build -t ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }} .
+          docker build --no-cache --progress=plain -t ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }} . 2>&1
           docker tag ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }} \
                      ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:latest
           docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:${{ github.sha }}
