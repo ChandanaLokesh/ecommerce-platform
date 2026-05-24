@@ -4,6 +4,8 @@ import com.ecommerce.dto.request.ProductRequest;
 import com.ecommerce.dto.response.ProductResponse;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.handler.GlobalExceptionHandler;
+import com.ecommerce.repository.UserRepository;
+import com.ecommerce.security.JwtService;
 import com.ecommerce.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -34,6 +36,8 @@ class ProductControllerTest {
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
     @MockBean private ProductService productService;
+    @MockBean private JwtService jwtService;
+    @MockBean private UserRepository userRepository;
 
     private ProductResponse sampleProductResponse() {
         return ProductResponse.builder()
