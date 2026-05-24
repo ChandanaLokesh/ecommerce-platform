@@ -17,6 +17,19 @@ export interface AuthResponse {
   fullName: string;
 }
 
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface RegisterRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phone?: string;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -36,6 +49,8 @@ export interface Page<T> {
   number: number;
   size: number;
 }
+
+export type PageResponse<T> = Page<T>;
 
 export interface CartItem {
   id: number;
@@ -71,6 +86,10 @@ export interface Order {
   items: OrderItem[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CreateOrderRequest {
+  shippingAddress: string;
 }
 
 export interface ApiError {
